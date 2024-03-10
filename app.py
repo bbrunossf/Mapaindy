@@ -7,13 +7,16 @@ from streamlit_folium import folium_static
 m = folium.Map(location=[-15.793889, -47.882778], zoom_start=11)
 
 # Criando uma variável global para armazenar a coordenada do clique
-coord = None
+if 'coord' not in st.session_state:
+  st.session_state.coord = None
 
-# Criando uma função JavaScript para atualizar a variável com a coordenada do clique
+# Criando uma função JavaScript para atualizar a variável e a caixa de texto com a coordenada do clique
 update_coord = """
 function updateCoord(e) {
   var coord = e.latlng.lat.toFixed(6) + ', ' + e.latlng.lng.toFixed(6);
   document.getElementById('coord').value = coord;
+  window.st.session_state.coord = coord;
+  window.st.write(coord);
 }
 """
 
@@ -30,7 +33,7 @@ coord = st.text_input('Coordenada do clique', '', type='default', key='coord')
 if st.button('Adicionar marcador'):
   # Tentando converter a entrada em uma lista de números
   try:
-    coord = eval('[' + coord + ']')
+    coord = eval('[' + st.session_state.coord + ']')
     # Verificando se a entrada é uma lista de dois números
     if isinstance(coord, list) and len(coord) == 2 and all(isinstance(x, (int, float)) for x in coord):
       # Criando o objeto Marker com a coordenada, o popup e o ícone
