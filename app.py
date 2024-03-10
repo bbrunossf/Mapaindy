@@ -14,9 +14,8 @@ if 'coord' not in st.session_state:
 update_coord = """
 function updateCoord(e) {
   var coord = e.latlng.lat.toFixed(6) + ', ' + e.latlng.lng.toFixed(6);
-  document.getElementById('coord').value = coord;
   window.st.session_state.coord = coord;
-  window.st.write(coord);
+  window.st.text_input('Coordenada do clique', coord, type='default', key='coord');
 }
 """
 
@@ -25,9 +24,6 @@ m.get_root().header.add_child(folium.Element('<script type="text/javascript">{}<
 
 # Criando um evento de clique no mapa que chama a função JavaScript
 m.add_child(folium.LatLngPopup())
-
-# Criando uma caixa de texto oculta para receber a coordenada do clique
-coord = st.text_input('Coordenada do clique', '', type='default', key='coord')
 
 # Criando um botão para adicionar o marcador
 if st.button('Adicionar marcador'):
