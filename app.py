@@ -24,7 +24,7 @@ m.get_root().header.add_child(folium.Element('<script type="text/javascript">{}<
 
 # Criando um evento de clique no mapa que chama a função JavaScript
 m.add_child(folium.LatLngPopup())
-st.text_input(value="teste")
+st.text_input(update_coord)
 # Criando um botão para adicionar o marcador
 if st.button('Adicionar marcador'):
   # Tentando converter a entrada em uma lista de números
