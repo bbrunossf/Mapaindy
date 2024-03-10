@@ -36,6 +36,7 @@ if st.button('Adicionar marcador'):
       marker = folium.Marker(location=coord, popup='Marcador', icon=folium.Icon(color='red', icon='info-sign'))
       # Adicionando o marcador ao mapa
       marker.add_to(m)
+      st.write(coord)
       # Exibindo uma mensagem de sucesso
       st.success('Marcador adicionado com sucesso!')
     else:
