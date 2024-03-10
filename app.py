@@ -24,10 +24,11 @@ def main():
     # Botão para adicionar marcador
     with col2:
         st.write("Clique no mapa para adicionar um marcador")
-        lat, lon = st.map("Mapa")
+        # Utilizando st.map para mostrar o mapa e capturar as coordenadas clicadas
+        map_clicked = st.map(m)
+        lat, lon = map_clicked.pydeck_chart.get_selection_data()["lat"], map_clicked.pydeck_chart.get_selection_data()["lon"]
 
         if st.button("Adicionar Marcador"):
             add_marker(lat, lon)
-
 if __name__ == "__main__":
     main()
